@@ -84,6 +84,7 @@ public class mainPageController extends UIController {
         stage.show();
         applicationController controller = loader.getController();
         controller.start(this.main, 0, new Form());
+        controller.createPage1();
     }
 
     /**
