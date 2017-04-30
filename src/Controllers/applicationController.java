@@ -1,17 +1,22 @@
 package Controllers;
 
 import Form.Form;
+import Initialization.Main;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.Date;
@@ -24,9 +29,10 @@ import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 /**
  * Created by erickmoo on 4/29/17.
  */
-public class applicationController {
+public class applicationController extends UIController {
 
     private Form form = new Form();
+    private int count = 0;
 
     @FXML
     private ComboBox source_combobox, alcohol_type_combobox;
@@ -51,9 +57,97 @@ public class applicationController {
     public Label otherCountryLabel;
     public Label otherStreetLabel;
 
+    void start(Main main, int count, Form form) {
+        this.main = main;
+        setCount(count);
+        setForm(form);
+        if(count == 0) {
+            source_combobox.setItems(FXCollections.observableArrayList("Imported", "Domestic"));
+            alcohol_type_combobox.setItems(FXCollections.observableArrayList("Malt Beverages", "Wine", "Distilled Spirits"));
+        }
+    }
+
+    private void setCount(int count) {
+        this.count = count;
+    }
+
+    private void setForm(Form form) {
+        this.form = form;
+    }
+
+    @FXML
+    public void changePageBack() throws IOException{
+        System.out.println("Count before: " + count);
+        Stage stage;
+        Button button = backButton;
+        count--;
+        System.out.println("Count after: " + count);
+        stage=(Stage) button.getScene().getWindow();
+        String pageName = "";
+        switch (count) {
+            case -1: pageName = "mainPage.fxml"; break;
+            case 0: pageName = "applicationPage1.fxml"; break;
+            case 1: pageName = "applicationPage2.fxml"; break;
+            case 2: pageName = "applicationPage3.fxml"; break;
+            case 3: pageName = "applicationPage4.fxml"; break;
+            case 4:
+                if(form.getalcohol_type().equals("Wine")) {pageName = "applicationPageWine.fxml";}
+                else {pageName = "printableVersion.fxml";}
+                break;
+        }
+        System.out.println("Change page to: " + pageName);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/" + pageName));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+        if(count < 0) {
+            mainPageController controller = loader.getController();
+            controller.start(this.main);
+            return;
+        }
+        applicationController controller = loader.getController();
+        controller.start(this.main, count, form);
+    }
+
+    @FXML
+    public void changePageNext() throws IOException{
+        System.out.println("Count before: " + count);
+        Stage stage;
+        Button button = nextButton;
+        count++;
+        System.out.println("Count after: " + count);
+        stage=(Stage) button.getScene().getWindow();
+        String pageName = "";
+        switch (count) {
+            case -1: pageName = "mainPage.fxml"; break;
+            case 0: pageName = "applicationPage1.fxml"; break;
+            case 1: pageName = "applicationPage2.fxml"; break;
+            case 2: pageName = "applicationPage3.fxml"; break;
+            case 3: pageName = "applicationPage4.fxml"; break;
+            case 4:
+                if(form.getalcohol_type() == null) {
+                    pageName = "applicationPage1.fxml";
+                    count = 0;
+                }
+                else if(form.getalcohol_type().equals("Wine")) {pageName = "applicationPageWine.fxml";}
+                else {pageName = "printableVersion.fxml";}
+                break;
+        }
+        System.out.println("Change page to: " + pageName);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/" + pageName));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+        if(count < 0) {
+            mainPageController controller = loader.getController();
+            controller.start(this.main);
+            return;
+        }
+        applicationController controller = loader.getController();
+        controller.start(this.main, count, form);
+    }
+
     public void createPage1() {
-        source_combobox.setItems(FXCollections.observableArrayList("Imported", "Domestic"));
-        alcohol_type_combobox.setItems(FXCollections.observableArrayList("Malt Beverages", "Wine", "Distilled Spirits"));
         form.setSource((String)source_combobox.getValue());
         form.setalcohol_type((String)alcohol_type_combobox.getValue());
         form.setrep_id(repID.getText());
@@ -204,6 +298,8 @@ public class applicationController {
     }
 
     @FXML
-    public void checkType() {}
+    public void checkType() {
+        //
+    }
 
 }

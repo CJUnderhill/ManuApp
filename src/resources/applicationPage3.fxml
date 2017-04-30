@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
    <content>
       <AnchorPane prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -44,8 +44,8 @@
                   <Label layoutX="17.0" layoutY="184.0" text="TTB ID" />
                </children>
             </Group>
-            <Button fx:id="backButton" layoutX="120.0" layoutY="405.0" mnemonicParsing="false" text="Back" />
-            <Button fx:id="nextButton" layoutX="525.0" layoutY="405.0" mnemonicParsing="false" text="Next" />
+            <Button fx:id="backButton" layoutX="120.0" layoutY="405.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
+            <Button fx:id="nextButton" layoutX="525.0" layoutY="405.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" text="Next" />
          </children>
       </AnchorPane>
    </content>

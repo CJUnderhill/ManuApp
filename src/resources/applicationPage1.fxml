@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -30,7 +30,8 @@
             <TextField fx:id="fancifulName" layoutX="325.0" layoutY="215.0" promptText="Fanciful Name (If Any)" />
             <TextField fx:id="alcoholContent" layoutX="325.0" layoutY="250.0" prefHeight="27.0" prefWidth="158.0" promptText="Alcohol Content" />
             <TextField fx:id="formula" layoutX="325.0" layoutY="288.0" prefHeight="31.0" prefWidth="100.0" promptText="Formula" />
-            <Button fx:id="nextButton" layoutX="507.0" layoutY="396.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="72.0" text="Next" />
+            <Button fx:id="nextButton" layoutX="507.0" layoutY="396.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" prefHeight="0.0" prefWidth="72.0" text="Next" />
+            <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
          </children>
       </AnchorPane>
    </content>

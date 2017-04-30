@@ -2,6 +2,7 @@ package Controllers;
 
 import Initialization.Main;
 import User.User;
+import Form.Form;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -74,7 +75,15 @@ public class mainPageController extends UIController {
     }
 
     @FXML
-    private void submitAction() {
+    private void submitAction() throws IOException {
+        Stage stage;
+        stage=(Stage) submitButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/applicationPage1.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+        applicationController controller = loader.getController();
+        controller.start(this.main, 0, new Form());
     }
 
     /**

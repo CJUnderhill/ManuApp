@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -26,8 +26,8 @@
                   <TextField fx:id="phLevel" layoutX="151.0" layoutY="130.0" prefHeight="31.0" prefWidth="199.0" promptText="PH Level (Required)" />
                </children>
             </Group>
-            <Button fx:id="backButton" layoutX="105.0" layoutY="361.0" mnemonicParsing="false" text="Back" />
-            <Button fx:id="nextButton" layoutX="528.0" layoutY="361.0" mnemonicParsing="false" text="Next" />
+            <Button fx:id="backButton" layoutX="105.0" layoutY="361.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
+            <Button fx:id="nextButton" layoutX="528.0" layoutY="361.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" text="Next" />
          </children>
       </AnchorPane>
    </content>

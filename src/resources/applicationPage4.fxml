@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -24,8 +24,8 @@
             <Label layoutX="26.0" layoutY="248.0" text="It Does NOT Appear on the Labels Affixed Below " />
             <TextField fx:id="signature" layoutX="287.0" layoutY="339.0" prefHeight="32.0" prefWidth="178.0" promptText="Signature (Required)" />
             <Label layoutX="205.0" layoutY="344.0" text="Signature" />
-            <Button fx:id="nextButton" layoutX="512.0" layoutY="404.0" mnemonicParsing="false" text="Next" />
-            <Button fx:id="backButton" layoutX="99.0" layoutY="405.0" mnemonicParsing="false" text="Back" />
+            <Button fx:id="nextButton" layoutX="512.0" layoutY="404.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" text="Next" />
+            <Button fx:id="backButton" layoutX="99.0" layoutY="405.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
          </children>
       </AnchorPane>
    </content>
