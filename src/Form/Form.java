@@ -421,8 +421,4 @@ public class Form {
     public void setapplication_type_text(ArrayList<String> application_type_text) {
         this.application_type_text = application_type_text;
     }
-
-    public String getFormula() {
-        return formula;
-    }
 }

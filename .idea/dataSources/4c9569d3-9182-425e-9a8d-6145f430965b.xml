@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="DB">
-  <database-model serializer="dbm" rdbms="DERBY" format-version="4.1">
+  <database-model serializer="dbm" rdbms="DERBY" format-version="4.0">
     <root id="1"/>
     <schema id="2" parent="1" name="APP">
       <Current>1</Current>
@@ -159,6 +159,8 @@
       <RefTableName>USERS</RefTableName>
       <RefKeyName>SQL170411192615360</RefKeyName>
       <RefColNames>USER_ID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <foreign-key id="48" parent="13" name="FORMS_USERS_APPLICANT_ID_FK">
       <ColNames>APPLICANT_ID</ColNames>
@@ -166,6 +168,8 @@
       <RefTableName>USERS</RefTableName>
       <RefKeyName>SQL170411192615360</RefKeyName>
       <RefColNames>USER_ID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <column id="49" parent="14" name="ORIGIN_CODE">
       <Position>1</Position>
@@ -212,6 +216,8 @@ OPTION_NO</ColNames>
       <RefTableName>FORMS</RefTableName>
       <RefKeyName>SQL170411192615430</RefKeyName>
       <RefColNames>TTB_ID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
     </foreign-key>
     <column id="58" parent="16" name="USER_ID">
       <Position>1</Position>

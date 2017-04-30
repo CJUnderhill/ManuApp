@@ -20,7 +20,7 @@
             <Label layoutX="165.0" layoutY="256.0" text="Alcohol Content" />
             <Label layoutX="165.0" layoutY="294.0" text="Formula" />
             <ComboBox fx:id="source_combobox" layoutX="86.0" layoutY="338.0" prefHeight="0.0" prefWidth="228.0" promptText="Source of Product (Required)" />
-            <ComboBox fx:id="alcohol_type_combobox" layoutX="364.0" layoutY="338.0" onAction="#checkType" prefHeight="2.0" prefWidth="215.0" promptText="Type of Product (Required)" />
+            <ComboBox fx:id="alcohol_type_combobox" layoutX="364.0" layoutY="338.0" prefHeight="2.0" prefWidth="215.0" promptText="Type of Product (Required)" />
             <ProgressBar layoutX="274.0" layoutY="401.0" prefWidth="200.0" progress="0.0" />
             <Label layoutX="190.0" layoutY="401.0" text="Progress: " />
             <TextField fx:id="repID" layoutX="325.0" layoutY="71.0" promptText="REP. ID. NO. (If Any)" />
