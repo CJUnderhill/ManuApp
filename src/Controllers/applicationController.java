@@ -203,4 +203,7 @@ public class applicationController {
         }
     }
 
+    @FXML
+    public void checkType() {}
+
 }
