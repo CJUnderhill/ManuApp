@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
+   <content>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
+         <children>
+            <Label layoutX="165.0" layoutY="77.0" text="REP ID NO." />
+            <Label layoutX="165.0" layoutY="112.0" text="Permit/Brewer's NO." />
+            <Label layoutX="165.0" layoutY="151.0" text="Serial Number" />
+            <Label layoutX="165.0" layoutY="185.0" text="Brand Name" />
+            <Label layoutX="165.0" layoutY="221.0" text="Fanciful Name" />
+            <Label layoutX="165.0" layoutY="256.0" text="Alcohol Content" />
+            <Label layoutX="165.0" layoutY="294.0" text="Formula" />
+            <ComboBox fx:id="source_combobox" layoutX="86.0" layoutY="338.0" prefHeight="0.0" prefWidth="228.0" promptText="Source of Product (Required)" />
+            <ComboBox fx:id="alcohol_type_combobox" layoutX="364.0" layoutY="338.0" onAction="#checkType" prefHeight="2.0" prefWidth="215.0" promptText="Type of Product (Required)" />
+            <ProgressBar layoutX="274.0" layoutY="401.0" prefWidth="200.0" progress="0.0" />
+            <Label layoutX="190.0" layoutY="401.0" text="Progress: " />
+            <TextField fx:id="repID" layoutX="325.0" layoutY="71.0" promptText="REP. ID. NO. (If Any)" />
+            <TextField fx:id="permitNO" layoutX="325.0" layoutY="107.0" promptText="Brewer's NO. (Required)" />
+            <TextField fx:id="serialNO" layoutX="325.0" layoutY="143.0" promptText="Serial Number (Required)" />
+            <TextField fx:id="brandName" layoutX="325.0" layoutY="179.0" promptText="Brand Name (Required)" />
+            <TextField fx:id="fancifulName" layoutX="325.0" layoutY="215.0" promptText="Fanciful Name (If Any)" />
+            <TextField fx:id="alcoholContent" layoutX="325.0" layoutY="250.0" prefHeight="27.0" prefWidth="158.0" promptText="Alcohol Content" />
+            <TextField fx:id="formula" layoutX="325.0" layoutY="288.0" prefHeight="31.0" prefWidth="100.0" promptText="Formula" />
+            <Button fx:id="nextButton" layoutX="507.0" layoutY="396.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="72.0" text="Next" />
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

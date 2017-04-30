@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,7 +19,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="500.0" prefWidth="700.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="700.0">
                <children>
@@ -37,7 +38,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="viewSubmittedButton" layoutX="223.0" layoutY="350.0" mnemonicParsing="false" onAction="#displaySubmittedApplications" onMouseClicked="#displaySubmittedApplications" text="View Submitted Applications" visible="false">
+                  <Button fx:id="viewSubmittedButton" layoutX="223.0" layoutY="375.0" mnemonicParsing="false" onAction="#displaySubmittedApplications" onMouseClicked="#displaySubmittedApplications" text="View Submitted Applications" visible="false">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -47,6 +48,8 @@
                         <Image url="@images/vol3-401-Sir-Isaac-Newton-q75-1002x103518-04-2017-19-30-56.jpg" />
                      </image>
                   </ImageView>
+                  <Label layoutX="247.0" layoutY="14.0" text="Logged In As:" />
+                  <Label fx:id="loggedUsername" layoutX="358.0" layoutY="14.0" text="Not logged in" />
                </children>
             </AnchorPane>
         </content>

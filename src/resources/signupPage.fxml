@@ -7,46 +7,46 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="Controllers.signupPageController">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.signupPageController">
   <content>
     <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="600.0">
          <children>
-            <TextField fx:id="firstName" layoutX="76.0" layoutY="130.0" prefHeight="39.0" prefWidth="150.0" promptText="First Name">
+            <TextField fx:id="firstName" layoutX="125.0" layoutY="137.0" prefHeight="39.0" prefWidth="150.0" promptText="First Name">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="middleInitial" layoutX="260.0" layoutY="130.0" prefHeight="31.0" prefWidth="80.0" promptText="Middle">
+            <TextField fx:id="middleInitial" layoutX="309.0" layoutY="137.0" prefHeight="31.0" prefWidth="80.0" promptText="Middle">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="lastName" layoutX="374.0" layoutY="130.0" prefHeight="39.0" prefWidth="150.0" promptText="Last Name">
+            <TextField fx:id="lastName" layoutX="423.0" layoutY="137.0" prefHeight="39.0" prefWidth="150.0" promptText="Last Name">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="username" layoutX="76.0" layoutY="178.0" prefHeight="39.0" prefWidth="190.0" promptText="Username">
+            <TextField fx:id="username" layoutX="125.0" layoutY="185.0" prefHeight="39.0" prefWidth="190.0" promptText="Username">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="password" layoutX="334.0" layoutY="178.0" prefHeight="39.0" prefWidth="190.0" promptText="Password">
+            <TextField fx:id="password" layoutX="383.0" layoutY="185.0" prefHeight="39.0" prefWidth="190.0" promptText="Password">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="email" layoutX="76.0" layoutY="229.0" prefHeight="39.0" prefWidth="190.0" promptText="Email">
+            <TextField fx:id="email" layoutX="125.0" layoutY="236.0" prefHeight="39.0" prefWidth="190.0" promptText="Email">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="phoneNo" layoutX="334.0" layoutY="229.0" onAction="#createUser" prefHeight="39.0" prefWidth="190.0" promptText="Phone Number">
+            <TextField fx:id="phoneNo" layoutX="383.0" layoutY="236.0" onAction="#createUser" prefHeight="39.0" prefWidth="190.0" promptText="Phone Number">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Button fx:id="signupButton" layoutX="256.0" layoutY="300.0" mnemonicParsing="false" onAction="#createUser" onMouseClicked="#createUser" text="Sign Up">
+            <Button fx:id="signupButton" layoutX="305.0" layoutY="307.0" mnemonicParsing="false" onAction="#createUser" onMouseClicked="#createUser" text="Sign Up">
                <font>
                   <Font size="18.0" />
                </font>
@@ -56,7 +56,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label layoutX="154.0" layoutY="34.0" text="Create an Account">
+            <Label layoutX="285.0" layoutY="44.0" text="Create an Account">
                <font>
                   <Font size="36.0" />
                </font>

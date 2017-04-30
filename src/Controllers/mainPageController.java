@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -19,12 +20,19 @@ public class mainPageController extends UIController {
     private Button logoutButton, loginButton, submitButton, viewSubmittedButton;
     @FXML
     private ImageView imageView; //TODO: find a good image to set as mainPage image
+    @FXML
+    private Label loggedUsername;
 
     /**
      * Initialize mainPage.fxml
      */
     public void start(Main main) {
         this.main = main;
+        if(main.getUser().getUid() != null) {
+            loggedUsername.setText(main.getUser().getUsername());
+        } else {
+            loggedUsername.setText("Not logged in");
+        }
         setActionOnEnter();
         // If not logged in, hide logoutButton, show it otherwise
         if(super.main.getUser().getUid() == null) {
