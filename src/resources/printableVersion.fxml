@@ -1,44 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<ScrollPane pannable="true" prefHeight="564.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.printableVersionController">
-    <content>
-        <AnchorPane fx:id="printAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#saveAsPng" prefHeight="1200.0" prefWidth="1000.0" style="-fx-background-image: url('/resources/images/form.png'); -fx-background-size: 1000px; -fx-background-repeat: no-repeat;">
-            <children>
-                <Label fx:id="ttb_id_print" layoutX="100.0" layoutY="78.0" text="TTB ID" />
-                <Label fx:id="rep_id_print" layoutX="58.33333" layoutY="136.66666" text="Rep ID" />
-                <Label fx:id="permit_no_print" layoutX="58.33333" layoutY="200.0" text="Permit No" />
-                <Label fx:id="serial_no_print" layoutX="58.33333" layoutY="253.33333" text="Serial No" />
-                <Label fx:id="brand_name_print" layoutX="58.333333" layoutY="350.0" text="Brand Name" />
-                <Label fx:id="fanciful_name_print" layoutX="58.33333" layoutY="391.666666" text="Fanciful Name" />
-                <Label fx:id="formula_print" layoutX="58.333333" layoutY="433.333333" text="Formula" />
-                <Label fx:id="grape_varietals_print" layoutX="283.333333" layoutY="433.333333" text="Grape Varietals" />
-                <Label fx:id="wine_appellation_print" layoutX="58.333333" layoutY="491.666666" text="Wine Appellation" />
-                <Label fx:id="phone_no_print" layoutX="58.333333" layoutY="545.0" text="Phone Number" />
-                <Label fx:id="email_print" layoutX="283.333333" layoutY="545.0" text="Email" />
-                <Label fx:id="mailing_street_address2_print" layoutX="436.6666666" layoutY="343.3333333" text="Mailing Street Address" />
-                <Label fx:id="mailing_street_address1_print" layoutX="436.6666666666" layoutY="240.0" text="Mailing Street Address" />
-                <Label fx:id="mailing_second_line2_print" layoutX="436.6666" layoutY="363.33333" text="Mailing Second Line" />
-                <Label fx:id="mailing_second_line1_print" layoutX="436.333333" layoutY="260.0" text="Mailing Second Line" />
-                <Label fx:id="mailing_third_line2_print" layoutX="436.66666" layoutY="383.33333" text="Mailing Third Line" />
-                <Label fx:id="mailing_third_line1_print" layoutX="436.6666666" layoutY="280.0" text="Mailing Third Line" />
-                <CheckBox fx:id="domesticCheck" layoutX="226.666666" layoutY="206.66666" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" />
-                <CheckBox fx:id="importCheck" layoutX="321.666666" layoutY="206.66666" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" />
-                <CheckBox fx:id="wineCheck" layoutX="240.0" layoutY="273.333333" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" />
-                <CheckBox fx:id="distilledCheck" layoutX="240.0" layoutY="295.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" />
-                <CheckBox fx:id="maltCheck" layoutX="240.0" layoutY="315.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" />
-                <Label fx:id="label_text_print" layoutX="95" layoutY="620.0" text="TextLabel" />
-                <Label fx:id="submit_date_print" layoutX="60.0" layoutY="801" text="date" />
-                <Label fx:id="signature_print" layoutX="232" layoutY="801" text="Signature" />
-                <Label fx:id="applicant_name_print" layoutX="672.0" layoutY="801" text="Label" />
-                <CheckBox fx:id="cert_label_approval_print" layoutX="645.0" layoutY="457.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" />
-                <CheckBox fx:id="cert_exemption_print" layoutX="645.0" layoutY="488.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" />
-                <CheckBox fx:id="cert_distinctive_print" layoutX="645.0" layoutY="437.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" />
-                <CheckBox fx:id="cert_resubmission_print" layoutX="645.0" layoutY="535" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" />
-            </children>
-        </AnchorPane>
-    </content></ScrollPane>
+<ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1210.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="Controllers.printableVersionController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1216.0" prefWidth="698.0">
+         <children>
+            <ImageView fitHeight="1148.0" fitWidth="698.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../../../ManufacturerApp/src/resources/images/form.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <Button fx:id="saveAsButton" layoutX="304.0" layoutY="1171.0" mnemonicParsing="false" onAction="#saveAsAction" onMouseClicked="#saveAsAction" text="Save As..." />
+            <Text fx:id="ttb_id" layoutX="40.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TTB ID" wrappingWidth="219.60122680664062" />
+            <Text fx:id="rep_id" layoutX="34.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rep ID" wrappingWidth="117.40234375">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="permitNo" layoutX="23.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Permit No" />
+            <Text fx:id="serialNo" layoutX="32.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Serial No" wrappingWidth="118.71060943603516" />
+            <Text fx:id="brandName" layoutX="34.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brand Name" wrappingWidth="237.40232849121094">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="fancifulName" layoutX="33.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fanciful Name" wrappingWidth="237.40232849121094">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="formula" layoutX="29.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Formula" wrappingWidth="133.33480072021484" />
+            <Text fx:id="phoneNo" layoutX="27.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number" wrappingWidth="137.2941131591797" />
+            <Text fx:id="grapeVarietals" layoutX="168.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grape Varietal(s)" wrappingWidth="261.31396484375" />
+            <Text fx:id="wineAppellation" layoutX="25.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wine Appellation" wrappingWidth="412.13328552246094" />
+            <Text fx:id="email" layoutX="173.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="256.7386016845703" />
+            <Text fx:id="labelText" layoutX="32.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label Text" wrappingWidth="634.1008911132812" />
+            <Text fx:id="submitDate" layoutX="32.0" layoutY="579.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Date" wrappingWidth="104.09716796875" />
+            <Text fx:id="signature" layoutX="147.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signature" wrappingWidth="245.8527069091797" />
+            <Text fx:id="applicantName" layoutX="413.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Applicant Name" wrappingWidth="251.102294921875" />
+            <Text fx:id="mailingAddress" layoutX="292.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mailing Address" wrappingWidth="375.2267150878906" />
+            <Text fx:id="differentMailingAddress" layoutX="292.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Different Mailing Address" wrappingWidth="375.2267150878906" />
+            <Text fx:id="expirationDate" layoutX="555.0" layoutY="749.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration Date" wrappingWidth="114.94970703125" />
+            <CheckBox fx:id="importedCheckbox" layoutX="228.0" layoutY="147.0" mnemonicParsing="false">
+               <font>
+                  <Font size="4.5" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="domesticCheckbox" layoutX="162.0" layoutY="147.0" mnemonicParsing="false">
+               <font>
+                  <Font size="4.5" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="wineCheckbox" layoutX="169.0" layoutY="195.0" mnemonicParsing="false">
+               <font>
+                  <Font size="4.5" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="distilledCheckbox" layoutX="169.0" layoutY="208.0" mnemonicParsing="false">
+               <font>
+                  <Font size="4.5" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="maltCheckbox" layoutX="169.0" layoutY="220.0" mnemonicParsing="false">
+               <font>
+                  <Font size="4.5" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="certLabelApprovalCheckbox" layoutX="453.0" layoutY="305.0" mnemonicParsing="false">
+               <font>
+                  <Font size="4.5" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="certExemptionCheckbox" layoutX="453.0" layoutY="319.0" mnemonicParsing="false">
+               <font>
+                  <Font size="4.5" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="distinctiveCheckbox" layoutX="453.0" layoutY="344.0" mnemonicParsing="false">
+               <font>
+                  <Font size="4.5" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="resubmissionCheckbox" layoutX="453.0" layoutY="378.0" mnemonicParsing="false">
+               <font>
+                  <Font size="4.5" />
+               </font>
+            </CheckBox>
+            <Text fx:id="certExemptionText" layoutX="511.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="41.697265625">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Text>
+            <Text fx:id="distinctiveText" layoutX="618.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="53.697265625">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Text>
+            <Text fx:id="resubmissionText" layoutX="495.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="126.697265625">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

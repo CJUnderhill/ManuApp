@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Status:
+ * Status: TODO: add validations
  */
 public class signupPageController extends UIController {
 
@@ -25,8 +25,6 @@ public class signupPageController extends UIController {
     private TextField firstName, middleInitial, lastName, username, password, email, phoneNo;
     @FXML
     private Button backButton, signupButton;
-    @FXML
-    private AnchorPane anchorPane;
 
     private DBManager dbManager = new DBManager();
 

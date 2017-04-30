@@ -1,141 +1,130 @@
 package Controllers;
 
+import DBManager.DBManager;
+import Initialization.Main;
+import User.User;
 import Form.Form;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Status: incomplete.
  */
-public class printableVersionController {
+public class printableVersionController extends UIController {
 
-    private Form form;
+    private DBManager dbManager = new DBManager();
+    private Form form = new Form();
 
     @FXML
-    private AnchorPane printAnchorPane;
+    private ScrollPane scrollPane;
     @FXML
-    private Label ttb_id_print;
+    private Text ttb_id, rep_id, permitNo, serialNo, brandName, fancifulName, formula, phoneNo,
+            grapeVarietals, wineAppellation, email, labelText, submitDate, signature, applicantName,
+            mailingAddress, differentMailingAddress, expirationDate, certExemptionText, distinctiveText, resubmissionText;
     @FXML
-    private Label rep_id_print;
+    private CheckBox domesticCheckbox, importedCheckbox, wineCheckbox, maltCheckbox, distilledCheckbox,
+            certLabelApprovalCheckbox, certExemptionCheckbox, distinctiveCheckbox, resubmissionCheckbox;
     @FXML
-    private Label permit_no_print;
-    @FXML
-    private Label serial_no_print;
-    @FXML
-    private Label brand_name_print;
-    @FXML
-    private Label fanciful_name_print;
-    @FXML
-    private Label formula_print;
-    @FXML
-    private Label grape_varietals_print;
-    @FXML
-    private Label wine_appellation_print;
-    @FXML
-    private Label phone_no_print;
-    @FXML
-    private Label email_print;
-    @FXML
-    private Label mailing_street_address1_print;
-    @FXML
-    private Label mailing_second_line1_print;
-    @FXML
-    private Label mailing_third_line1_print;
-    @FXML
-    private Label mailing_street_address2_print;
-    @FXML
-    private Label mailing_second_line2_print;
-    @FXML
-    private Label mailing_third_line2_print;
-    @FXML
-    private CheckBox domesticCheck;
-    @FXML
-    private CheckBox importCheck;
-    @FXML
-    private CheckBox wineCheck;
-    @FXML
-    private CheckBox distilledCheck;
-    @FXML
-    private CheckBox maltCheck;
-    @FXML
-    private Label label_text_print;
-    @FXML
-    private Label submit_date_print,
-            signature_print,
-            applicant_name_print;
-    @FXML
-    private CheckBox cert_label_approval_print,
-            cert_exemption_print,
-            cert_distinctive_print,
-            cert_resubmission_print;
-    public void setFormPrintableVersion(Form form) {
-        System.out.println("this is form" + form);
-        System.out.println(form.getttb_id());
-//        form = dbManager.findSingleForm(form.getttb_id(), new ArrayList<>());
-        ttb_id_print.setText(form.getttb_id());
-        rep_id_print.setText(form.getrep_id());
-        permit_no_print.setText(form.getpermit_no());
-        serial_no_print.setText(form.getserial_no());
-        brand_name_print.setText(form.getbrand_name());
-        fanciful_name_print.setText(form.getfanciful_name());
-        formula_print.setText(form.getformula());
-        wine_appellation_print.setText(form.getwine_appellation());
-        grape_varietals_print.setText(form.getgrape_varietals());
-        phone_no_print.setText(form.getphone_no());
-        email_print.setText(form.getEmail());
-        mailing_street_address1_print.setText("");
-        mailing_street_address2_print.setText("");
-        mailing_second_line1_print.setText("");
-        mailing_second_line2_print.setText("");
-        mailing_third_line1_print.setText("");
-        mailing_third_line2_print.setText("");
-        if(form.getSource().equals("Domestic")) {
-            domesticCheck.setSelected(true);
-        } else {
-            importCheck.setSelected(true);
-        }
-        if(form.getalcohol_type().equals("Wine")) {
-            wineCheck.setSelected(true);
-        } else if(form.getalcohol_type().equals("Malt Beverages")) {
-            maltCheck.setSelected(true);
-        } else {
-            distilledCheck.setSelected(true);
-        }
-        label_text_print.setText(form.getlabel_text());
-        submit_date_print.setText(form.getsubmit_date().toString());
-        signature_print.setText(form.getSignature());
-        applicant_name_print.setText(form.getapplicant_id()); // TODO: add query for getting search
-        if(!form.getapplication_type().isEmpty() && form.getapplication_type().get(0) == true) {
-            cert_label_approval_print.setSelected(true);
-        } else if(!form.getapplication_type().isEmpty() && form.getapplication_type().get(1) == true) {
-            cert_exemption_print.setSelected(true);
-        } else if(!form.getapplication_type().isEmpty() && form.getapplication_type().get(2) == true) {
-            cert_distinctive_print.setSelected(true);
-        } else {
-            cert_resubmission_print.setSelected(true);
-        }
+    private Button saveAsButton;
+
+    public void start(Main main, Form form) {
+        this.main = main;
+        this.form = form;
+        setFormPrintableVersion();
     }
 
+    public void setFormPrintableVersion() {
+        ttb_id.setText(form.getttb_id());
+        if(form.getrep_id() != null) {rep_id.setText(form.getrep_id());}
+        else {rep_id.setText("");}
+        permitNo.setText(form.getpermit_no());
+        serialNo.setText(form.getserial_no());
+        brandName.setText(form.getbrand_name());
+        if(form.getfanciful_name() != null) {fancifulName.setText(form.getfanciful_name());}
+        else {fancifulName.setText("");}
+        if(form.getformula() != null) {formula.setText(form.getformula());}
+        else {formula.setText("");}
+        if(form.getphone_no() != null) {phoneNo.setText(form.getphone_no());}
+        else {phoneNo.setText("");}
 
-    public void saveAsPng(){
-        WritableImage image = printAnchorPane.snapshot(new SnapshotParameters(), null);
-        // TODO: probably use a file chooser here
-        File file = new File(System.getProperty("user.dir") + "/form.png");
+        if(form.getalcohol_type().equals("Wine")) {
+            wineCheckbox.setSelected(true);
+            if(form.getgrape_varietals() != null) {grapeVarietals.setText(form.getgrape_varietals());}
+            else {grapeVarietals.setText("");}
+            if(form.getwine_appellation() != null) {wineAppellation.setText(form.getwine_appellation());}
+            else {wineAppellation.setText("");}
+        } else if(form.getalcohol_type().equals("Distilled Spirits")) {
+            distilledCheckbox.setSelected(true);
+        } else {
+            maltCheckbox.setSelected(true);
+        }
+
+        if(form.getSource().equals("Imported")) {
+            importedCheckbox.setSelected(true);
+        } else {
+            domesticCheckbox.setSelected(true);
+        }
+
+        if(form.getapplication_type().get(0)) {
+            certLabelApprovalCheckbox.setSelected(true);
+        }
+        if(form.getapplication_type().get(1)) {
+            certExemptionCheckbox.setSelected(true);
+            certExemptionText.setText(form.getapplication_type_text().get(0));
+        }
+        if(form.getapplication_type().get(2)) {
+            distinctiveCheckbox.setSelected(true);
+            distinctiveText.setText(form.getapplication_type_text().get(1));
+        }
+        if(form.getapplication_type().get(3)) {
+            resubmissionCheckbox.setSelected(true);
+            resubmissionText.setText(form.getapplication_type_text().get(2));
+        }
+
+        email.setText(form.getEmail());
+        if(form.getlabel_text() != null) {labelText.setText(form.getlabel_text());}
+        else {labelText.setText("");}
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        submitDate.setText(form.getsubmit_date().toLocalDate().format(formatter)); //TODO: check if it works
+        signature.setText(form.getSignature());
+        User applicant = dbManager.findUser("user_id='" + form.getapplicant_id() + "'");
+        String applicant_name = applicant.getFirstName() + " " + applicant.getMiddleInitial() + " " + applicant.getLastName();
+        applicantName.setText(applicant_name);
+        String combinedAddress = form.getapplicant_street(); //TODO: finish this
+        mailingAddress.setText(""); //TODO: combine/make different lines for agent state, etc.
+        differentMailingAddress.setText(form.getmailing_address());
+        if(form.getexpiration_date() != null) {expirationDate.setText(form.getexpiration_date().toLocalDate().format(formatter));} //TODO: same as above
+        else {expirationDate.setText("");}
+    }
+
+    /**
+     * Saves form as a png
+     */
+    @FXML
+    public void saveAsAction(){
+        WritableImage image = scrollPane.snapshot(new SnapshotParameters(), null);
+        // TODO: check working
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        File selectedFile = directoryChooser.showDialog(null);
+        File file = new File(selectedFile.getPath() + "/printableForm_" + form.getttb_id() + ".png");
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
         } catch (IOException e) {
-            // TODO: handle exception here
             e.printStackTrace();
         }
-
     }
+
 }
