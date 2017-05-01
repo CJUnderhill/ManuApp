@@ -80,12 +80,6 @@ public class applicationController extends UIController {
     @FXML
     public void changePageBack() throws IOException{
         System.out.println("Count before: " + count);
-        if (!isValid() && errorLabel != null) {
-            displayValidityError();
-            return;
-        } /*else if (!errorLabel.getText().equals("")) {
-            removeValidityError();
-        }*/
         switch (count) {
             case 0: storePage1(); break;
             case 1: storePage2(); break;
@@ -138,10 +132,9 @@ public class applicationController extends UIController {
         if (!isValid()) {
             System.out.println("There is an error");
             displayValidityError();
-            return;
-        } /*else if (!errorLabel.getText().equals("")) {
             removeValidityError();
-        }*/
+            return;
+        }
         switch (count) {
             case 0: storePage1(); break;
             case 1: storePage2(); break;
@@ -441,7 +434,7 @@ public class applicationController extends UIController {
             otherZipcodeLabel.setVisible(false);
             otherCityLabel.setVisible(false);
             otherCountry.setVisible(false);
-            otherCountryLabel.setVisible(true);
+            otherCountryLabel.setVisible(false);
             otherZip.setVisible(false);
             otherState.setVisible(false);
             otherStreet.setVisible(false);
@@ -463,9 +456,15 @@ public class applicationController extends UIController {
     private boolean isValid(){
         boolean temp = true;
         switch (count) {
-            case 0: temp = (repIDValidation(repID.getText()) &&
-                    permitValidation(permitNO.getText()) &&
-                    serialValidation(serialNO.getText()));
+            case 0:
+                if (!repID.getText().equals("")) {
+                    temp = (repIDValidation(repID.getText()) &&
+                            permitValidation(permitNO.getText()) &&
+                            serialValidation(serialNO.getText()));
+                } else {
+                    temp = (permitValidation(permitNO.getText()) &&
+                            serialValidation(serialNO.getText()));
+                }
                     break;
             case 1: temp =  (emailValidation(email.getText()) &&
                     phoneNmbrValidation(phoneNo.getText()));
@@ -477,10 +476,16 @@ public class applicationController extends UIController {
     @FXML
     private void displayValidityError(){
         switch (count) {
-            case 0: if (!repIDValidation(repID.getText())){setRed(repID);}
-                    if (!permitValidation(permitNO.getText())){setRed(permitNO);}
-                    if (!serialValidation(serialNO.getText())){setRed(serialNO);}
-                    break;
+            case 0:
+                System.out.println("repID: " + repID.getText());
+                if (!repID.getText().equals("")) {
+                    if (!repIDValidation(repID.getText())) {
+                        setRed(repID);
+                    }
+                }
+                if (!permitValidation(permitNO.getText())){setRed(permitNO);}
+                if (!serialValidation(serialNO.getText())){setRed(serialNO);}
+                break;
             case 1: if (!emailValidation(email.getText())){setRed(email);}
                     if (!phoneNmbrValidation(phoneNo.getText())){setRed(phoneNo);}
                     break;
@@ -491,7 +496,7 @@ public class applicationController extends UIController {
     @FXML
     private void removeValidityError(){
         switch (count) {
-            case 0: if (repIDValidation(repID.getText())){removeRed(repID);}
+            case 0: if (repIDValidation(repID.getText()) || repID.getText().equals("")){removeRed(repID);}
                 if (permitValidation(permitNO.getText())){removeRed(permitNO);}
                 if (serialValidation(serialNO.getText())){removeRed(serialNO);}
                 break;
@@ -499,7 +504,9 @@ public class applicationController extends UIController {
                 if (phoneNmbrValidation(phoneNo.getText())){removeRed(phoneNo);}
                 break;
         }
-        errorLabel.setText("");
+        if ((repIDValidation(repID.getText()) || repID.getText().equals("")) && permitValidation(permitNO.getText()) && serialValidation(serialNO.getText())) {
+            errorLabel.setText("");
+        }
     }
 
     private void setRed(TextField text){
@@ -507,7 +514,7 @@ public class applicationController extends UIController {
     }
 
     private void removeRed(TextField text){
-        text.setStyle("-fx-border-color:green");
+        text.setStyle("-fx-border-color:default");
     }
 
 }
