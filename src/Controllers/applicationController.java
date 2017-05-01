@@ -1,5 +1,6 @@
 package Controllers;
 
+import DBManager.DBManager;
 import Form.Form;
 import Initialization.Main;
 import javafx.collections.FXCollections;
@@ -22,7 +23,9 @@ import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static Form.StringParsing.*;
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
@@ -32,6 +35,7 @@ import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
  */
 public class applicationController extends UIController {
 
+    private DBManager dbManager = new DBManager();
     private Form form = new Form();
     private int count = 0;
 
@@ -221,8 +225,9 @@ public class applicationController extends UIController {
             return;
         }
         if(pageName.equals("printableVersion.fxml")) {
+            Form newForm = submitForm(form);
             printableVersionController controller = loader.getController();
-            controller.start(this.main, form);
+            controller.start(this.main, newForm);
             return;
         }
         applicationController controller = loader.getController();
@@ -295,6 +300,26 @@ public class applicationController extends UIController {
         setTextFields(form.getapplicant_state(), applicantState);
         setTextFields(form.getapplicant_zip(), applicantZip);
         setTextFields(form.getapplicant_country(), applicantCountry);
+        if(form.getmailing_address() != null && !form.getmailing_address().isEmpty()) {
+            sameAsApplicantBox.setSelected(true);
+            showSecondAddress();
+            String[] otherAddress = form.getmailing_address().split(" ");
+            if (otherAddress[0] != null) {
+                setTextFields(otherAddress[0], otherStreet);
+            }
+            if (otherAddress[1] != null) {
+                setTextFields(otherAddress[1], otherCity);
+            }
+            if (otherAddress[2] != null) {
+                setTextFields(otherAddress[2], otherState);
+            }
+            if (otherAddress[3] != null) {
+                setTextFields(otherAddress[3], otherZip);
+            }
+            if (otherAddress[4] != null) {
+                setTextFields(otherAddress[4], otherCountry);
+            }
+        }
     }
 
     public boolean storePage2() {
@@ -307,11 +332,11 @@ public class applicationController extends UIController {
         form.setapplicant_zip(applicantZip.getText());
         form.setapplicant_country(applicantCountry.getText());
 
-        if (sameAsApplicantBox.isSelected()) {
+        if (!sameAsApplicantBox.isSelected()) {
             form.setmailing_address("");
         } else {
-            form.setmailing_address(otherStreet.getText() + "\n" + otherCity.getText() + " " + otherState.getText()
-                    + "," + otherZip.getText() + "\n" + otherCountry.getText());
+            form.setmailing_address(otherStreet.getText() + " " + otherCity.getText() + " " + otherState.getText()
+                    + " " + otherZip.getText() + " " + otherCountry.getText());
         }
 
         if (applicantStreet.getText().equals("") || applicantState.getText().equals("") ||
@@ -334,7 +359,6 @@ public class applicationController extends UIController {
                 application_type.add(false);
             }
         }
-
         if (form.getapplication_type() != null) {
             application_type_text = form.getapplication_type_text();
         } else {
@@ -343,17 +367,16 @@ public class applicationController extends UIController {
                 application_type_text.add("hello");
             }
         }
-
         if (application_type.get(0)) {//choice 0
             option_1_checkbox.setSelected(true);
         } else if (application_type.get(1)) {
-            option_2_text.setText(application_type_text.get(1));
+            option_2_text.setText(application_type_text.get(0));
             option_2_checkbox.setSelected(true);
         } else if (application_type.get(2)) {
-            option_3_text.setText((application_type_text.get(2)));
+            option_3_text.setText((application_type_text.get(1)));
             option_3_checkbox.setSelected(true);
         } else if (application_type.get(3)) {
-            option_4_text.setText((application_type_text.get(3)));
+            option_4_text.setText((application_type_text.get(2)));
             option_4_checkbox.setSelected(true);
         }
     }
@@ -370,16 +393,17 @@ public class applicationController extends UIController {
         if (option_1_checkbox.isSelected()) {//choice 0
             application_type.set(0, true);
         } else if (option_2_checkbox.isSelected()) {
-            application_type_text.set(1, option_2_text.getText());
+            application_type_text.set(0, option_2_text.getText());
             application_type.set(1, true);
         } else if (option_3_checkbox.isSelected()) {
-            application_type_text.set(2, option_3_text.getText());
+            application_type_text.set(1, option_3_text.getText());
             application_type.set(2, true);
         } else if (option_4_checkbox.isSelected()) {
-            application_type_text.set(3, option_4_text.getText());
+            application_type_text.set(2, option_4_text.getText());
             application_type.set(3, true);
         }
-
+        System.out.println(application_type);
+        System.out.println(application_type_text);
         form.setapplication_type(application_type);
         form.setapplication_type_text(application_type_text);
     }
@@ -586,6 +610,17 @@ public class applicationController extends UIController {
 
     private void removeRed(TextField text){
         text.setStyle("-fx-border-color:default");
+    }
+
+    private Form submitForm(Form form) {
+        Form newForm = new Form(form.getrep_id(), form.getpermit_no(), form.getSource(), form.getserial_no(), form.getalcohol_type(),
+                form.getbrand_name(), form.getfanciful_name(), form.getalcohol_content(), form.getapplicant_street(), form.getapplicant_city(), form.getapplicant_state(),
+                form.getapplicant_zip(), form.getapplicant_country(), form.getmailing_address(), form.getformula(), form.getphone_no(),
+                form.getEmail(), form.getlabel_text(), form.getlabel_image(), new Date(Calendar.getInstance().getTimeInMillis()), form.getSignature(), "Pending",
+                null, main.getUser().getUid(), null, null, form.getvintage_year(), form.getpH_level(),
+                form.getgrape_varietals(), form.getwine_appellation(), form.getapplication_type(), form.getapplication_type_text(), form.getapproval_comments());
+        dbManager.persistForm(newForm);
+        return newForm;
     }
 
 }

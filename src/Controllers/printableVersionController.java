@@ -6,6 +6,8 @@ import User.User;
 import Form.Form;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -15,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -85,18 +88,27 @@ public class printableVersionController extends UIController {
 
         if(form.getapplication_type().get(0)) {
             certLabelApprovalCheckbox.setSelected(true);
+            certExemptionText.setText("");
+            distinctiveText.setText("");
+            resubmissionText.setText("");
         }
         if(form.getapplication_type().get(1)) {
             certExemptionCheckbox.setSelected(true);
             certExemptionText.setText(form.getapplication_type_text().get(0));
+            distinctiveText.setText("");
+            resubmissionText.setText("");
         }
         if(form.getapplication_type().get(2)) {
             distinctiveCheckbox.setSelected(true);
             distinctiveText.setText(form.getapplication_type_text().get(1));
+            certExemptionText.setText("");
+            resubmissionText.setText("");
         }
         if(form.getapplication_type().get(3)) {
             resubmissionCheckbox.setSelected(true);
             resubmissionText.setText(form.getapplication_type_text().get(2));
+            certExemptionText.setText("");
+            distinctiveText.setText("");
         }
 
         email.setText(form.getEmail());
@@ -114,8 +126,9 @@ public class printableVersionController extends UIController {
         String applicant_name = applicant.getFirstName() + " " + applicant.getMiddleInitial() + " " + applicant.getLastName();
         applicantName.setText(applicant_name);
 
-        String combinedAddress = form.getapplicant_street(); //TODO: finish this
-        mailingAddress.setText(""); //TODO: combine/make different lines for agent state, etc.
+        String combinedAddress = form.getapplicant_street() + "\n" + form.getapplicant_city() + ", "
+                + form.getapplicant_state() + "\n" + form.getapplicant_zip() + ", " + form.getapplicant_country();
+        mailingAddress.setText(combinedAddress);
 
         differentMailingAddress.setText(form.getmailing_address());
         if(form.getexpiration_date() != null) {expirationDate.setText(form.getexpiration_date().toLocalDate().format(formatter));} //TODO: same as above
@@ -135,9 +148,21 @@ public class printableVersionController extends UIController {
         File file = new File(selectedFile.getPath() + "/printableForm_" + form.getttb_id() + ".png");
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+            returnToMainPage();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void returnToMainPage() throws IOException {
+        Stage stage;
+        stage=(Stage) saveAsButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/mainPage.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+        mainPageController controller = loader.getController();
+        controller.start(this.main);
     }
 
 }

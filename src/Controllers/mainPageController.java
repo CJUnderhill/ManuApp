@@ -1,8 +1,12 @@
 package Controllers;
 
+import DBManager.DBManager;
 import Initialization.Main;
 import User.User;
 import Form.Form;
+import Form.CSVRecord;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class mainPageController extends UIController {
 
@@ -23,6 +28,8 @@ public class mainPageController extends UIController {
     private ImageView imageView; //TODO: find a good image to set as mainPage image
     @FXML
     private Label loggedUsername;
+
+    private DBManager dbManager = new DBManager();
 
     /**
      * Initialize mainPage.fxml
@@ -102,16 +109,23 @@ public class mainPageController extends UIController {
         controller.start(this.main);
     }
 
+//    @FXML
+//    private void displaySubmittedApplications() throws IOException {
+//        Stage stage;
+//        stage=(Stage) loginButton.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/submittedApplicationsPage.fxml"));
+//        Scene scene = new Scene(loader.load());
+//        stage.setScene(scene);
+//        stage.show();
+//        submittedApplicationsController controller = loader.getController();
+//        controller.start(this.main);
+//    }
+
     @FXML
-    private void displaySubmittedApplications() throws IOException {
-        Stage stage;
-        stage=(Stage) loginButton.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/submittedApplicationsPage.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.show();
-        submittedApplicationsController controller = loader.getController();
-        controller.start(this.main);
+    public void exportToCSV() {
+        ObservableList<CSVRecord> list = FXCollections.observableArrayList();
+        list = dbManager.findLabelsForCSV("applicant_id = '" + main.getUser().getUid() + "'");
+        dbManager.generateCSV(list, ",", ".csv");
     }
 
 }

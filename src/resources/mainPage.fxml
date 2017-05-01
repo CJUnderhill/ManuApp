@@ -38,7 +38,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="viewSubmittedButton" layoutX="223.0" layoutY="375.0" mnemonicParsing="false" onAction="#displaySubmittedApplications" onMouseClicked="#displaySubmittedApplications" text="View Submitted Applications" visible="false">
+                  <Button fx:id="viewSubmittedButton" layoutX="281.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#exportToCSV" text="Export To CSV" visible="false">
                      <font>
                         <Font size="18.0" />
                      </font>

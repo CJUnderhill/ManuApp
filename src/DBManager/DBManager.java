@@ -1,6 +1,7 @@
 package DBManager;
 
 import Form.Form;
+import Form.CSVRecord;
 import Form.AppRecord;
 import User.User;
 import javafx.collections.FXCollections;
@@ -172,7 +173,7 @@ public class DBManager {
 
     public ObservableList<AppRecord> findLabels(ArrayList<ArrayList<String>> filters, String more) {
         QueryBuilder queryBuilder = new QueryBuilder();
-        String fields = "ttb_id, permit_no, serial_no, fanciful_name, brand_name, alcohol_type, approved_date";
+        String fields = "ttb_id, permit_no, serial_no, fanciful_name, brand_name, alcohol_type";
         String query = queryBuilder.createLikeStatement("APP.FORMS", fields, filters);
         if (more != null && !more.isEmpty()) {
             if (filters.isEmpty()) {
@@ -197,7 +198,7 @@ public class DBManager {
                 String fancifulName = rs.getString("fanciful_name");
                 String brandName = rs.getString("brand_name");
                 String alcoholType = rs.getString("alcohol_type");
-                String approvedDate = rs.getDate("approved_date").toString();
+                //String approvedDate = rs.getDate("approved_date").toString();
 
                 AppRecord application = new AppRecord();
                 application.setFormID(ttbID);
@@ -208,8 +209,103 @@ public class DBManager {
                 application.setTypeID(alcoholType);
                 application.setTtbID(ttbID);
                 ol.add(application);
-                application.setCompletedDate(approvedDate);
+                //application.setCompletedDate(approvedDate);
                 application.setTtbID(ttbID);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+            return ol;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ObservableList<CSVRecord> findLabelsForCSV(String options) {
+        QueryBuilder queryBuilder = new QueryBuilder();
+        String fields = "*";
+        String query = queryBuilder.createSelectStatement("APP.FORMS", fields, options);
+        System.out.println(query);
+        ObservableList<CSVRecord> ol = FXCollections.observableArrayList();
+        try {
+            Connection connection = TTB_database.connect();
+            assert connection != null;
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String ttbID = rs.getString("ttb_id");
+                String repID = rs.getString("rep_id");
+                String permitNo = rs.getString("permit_no");
+                String source = rs.getString("source");
+                String serialNo = rs.getString("serial_no");
+                String alcoholType = rs.getString("alcohol_type");
+                String brandName = rs.getString("brand_name");
+                String fancifulName = rs.getString("fanciful_name");
+                String alcoholContent = rs.getString("alcohol_content");
+                String street = rs.getString("applicant_street");
+                String city = rs.getString("applicant_city");
+                String zip = rs.getString("applicant_zip");
+                String state = rs.getString("applicant_state");
+                String country = rs.getString("applicant_country");
+                String mailing = rs.getString("mailing_address");
+                String formula = rs.getString("formula");
+                String phoneNo = rs.getString("phone_no");
+                String email = rs.getString("email");
+                String labelText = rs.getString("label_text");
+                String signature = rs.getString("signature");
+
+                String wineAppellation = "";
+                String vintageYear = "";
+                String phLevel = "";
+                String grapeVarietals = "";
+                if(alcoholType.equals("Wine")) {
+                    try {
+                        QueryBuilder wineQB = new QueryBuilder();
+                        String winequery = wineQB.createSelectStatement("WINEONLY", "*", "ttb_id='" + ttbID + "'");
+                        System.out.println(winequery);
+                        Statement wineS = connection.createStatement();
+                        ResultSet wineRS = wineS.executeQuery(winequery);
+                        while (wineRS.next()) {
+                            vintageYear = wineRS.getString("vintage_year");
+                            phLevel = wineRS.getString("ph_level");
+                            grapeVarietals = wineRS.getString("grape_varietals");
+                            wineAppellation = wineRS.getString("wine_appellation");
+                        }
+                        wineRS.close();
+                        wineS.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                String typeOption = "";
+                String typeText = "";
+                try {
+                    QueryBuilder typeQB = new QueryBuilder();
+                    String typeQuery = typeQB.createSelectStatement("TYPEOFAPPLICATION", "*", "ttb_id='" + ttbID + "'");
+                    System.out.println(typeQuery);
+                    Connection typeC = TTB_database.connect();
+                    Statement typeS = typeC.createStatement();
+                    ResultSet typeRS = typeS.executeQuery(typeQuery);
+                    while (typeRS.next()) {
+                        typeOption = Integer.toString(typeRS.getInt("option_no"));
+                        typeText = typeRS.getString("option_description");
+                    }
+                    typeRS.close();
+                    typeS.close();
+                    typeC.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                CSVRecord application = new CSVRecord(repID,  permitNo,  source,  serialNo,
+                         alcoholType,  brandName,  fancifulName,  alcoholContent,
+                         street,  city,  state,  zip,  country,  mailing,
+                         formula,  phoneNo,  email,  labelText,
+                         signature,  vintageYear,  phLevel,  grapeVarietals,
+                         wineAppellation,  typeOption,  typeText);
+                
+                ol.add(application);
             }
             rs.close();
             stmt.close();
@@ -509,51 +605,113 @@ public class DBManager {
     }
 
 
-    // TODO: the commented line can be placed after the if - will fix the warning where the if is always true
-    // TODO: this throws an error to csvOptionsController where if you don't select a file path
-    // TODO: - and close the file chooser, the confirmation message still displays
-    public void generateCSV(ObservableList<AppRecord> list, String separator, String extension) {
+    public void generateCSV(ObservableList<CSVRecord> list, String separator, String extension) {
         DirectoryChooser dc = new DirectoryChooser();
         dc.setInitialDirectory(new File(System.getProperty("user.dir")));
         File selectedFile = dc.showDialog(null);
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
         File file = new File(selectedFile.getPath() + "/" + "labelResults" + dateFormat.format(new Date(System.currentTimeMillis())) + extension);
-        //File file = new File(selectedFile.getPath() + "/" + "labelResults" + dateFormat.format(new Date(System.currentTimeMillis())) + extension);
         try {
             FileWriter fileWriter = new FileWriter(file, false);
             System.out.println(file.getAbsolutePath());
-            fileWriter.write("TTB ID");
-            fileWriter.write(separator);
-            fileWriter.write("Completed Date");
-            fileWriter.write(separator);
-            fileWriter.write("Alcohol Type");
-            fileWriter.write(separator);
-            fileWriter.write("Brand Name");
-            fileWriter.write(separator);
-            fileWriter.write("Fanciful Name");
-            fileWriter.write(separator);
-            fileWriter.write("Permit Number");
-            fileWriter.write(separator);
-            fileWriter.write("Serial Number");
-            fileWriter.write("\n");
-            for (AppRecord ar : list) {
-                fileWriter.write(ar.getTtbID());
+            for (CSVRecord ar : list) {
+                try {
+                    fileWriter.write(ar.getRepID());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
                 fileWriter.write(separator);
-                fileWriter.write(ar.getCompletedDate());
+                fileWriter.write(ar.getPermitNo());
                 fileWriter.write(separator);
-                fileWriter.write(ar.getTypeID());
+                fileWriter.write(ar.getSource());
+                fileWriter.write(separator);
+                fileWriter.write(ar.getSerialNo());
+                fileWriter.write(separator);
+                fileWriter.write(ar.getAlcoholType());
                 fileWriter.write(separator);
                 fileWriter.write(ar.getBrandName());
                 fileWriter.write(separator);
                 try {
                     fileWriter.write(ar.getFancifulName());
                 } catch (NullPointerException e) {
-                    fileWriter.write("");
+                    fileWriter.write(" ");
                 }
                 fileWriter.write(separator);
-                fileWriter.write(ar.getPermitNo());
+                try {
+                    fileWriter.write(ar.getAlcoholContent());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
                 fileWriter.write(separator);
-                fileWriter.write(ar.getSerialNo());
+                try {
+                    fileWriter.write(ar.getStreet());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
+                fileWriter.write(separator);
+                fileWriter.write(ar.getCity());
+                fileWriter.write(separator);
+                fileWriter.write(ar.getState());
+                fileWriter.write(separator);
+                fileWriter.write(ar.getZip());
+                fileWriter.write(separator);
+                fileWriter.write(ar.getCountry());
+                fileWriter.write(separator);
+                try {
+                    fileWriter.write(ar.getMailing());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
+                fileWriter.write(separator);
+                try {
+                    fileWriter.write(ar.getFormula());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
+                fileWriter.write(separator);
+                try {
+                    fileWriter.write(ar.getPhoneNo());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
+                fileWriter.write(separator);
+                fileWriter.write(ar.getEmail());
+                fileWriter.write(separator);
+                try {
+                    fileWriter.write(ar.getLabelText());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
+                fileWriter.write(separator);
+                fileWriter.write(ar.getSignature());
+                fileWriter.write(separator);
+                fileWriter.write(ar.getVintageYear());
+                fileWriter.write(separator);
+                try {
+                    fileWriter.write(ar.getPhLevel());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
+                fileWriter.write(separator);
+                try {
+                    fileWriter.write(ar.getGrapeVarietals());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
+                fileWriter.write(separator);
+                try {
+                    fileWriter.write(ar.getWineAppellation());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
+                fileWriter.write(separator);
+                fileWriter.write(ar.getTypeOption());
+                fileWriter.write(separator);
+                try {
+                    fileWriter.write(ar.getTypeText());
+                } catch (NullPointerException e) {
+                    fileWriter.write(" ");
+                }
                 fileWriter.write("\n");
             }
             fileWriter.close();
