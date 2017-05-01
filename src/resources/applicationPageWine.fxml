@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -16,14 +16,14 @@
             <Label layoutX="208.0" layoutY="365.0" text="Progress: " />
             <Group layoutX="160.0" layoutY="104.0" AnchorPane.bottomAnchor="287.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="113.0">
                <children>
-                  <TextField fx:id="grapeVarietals" layoutX="152.0" layoutY="49.0" prefHeight="31.0" prefWidth="197.0" promptText="Grape Varietal(s) " />
+                  <TextField fx:id="grapeVarietals" layoutX="152.0" layoutY="49.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="197.0" promptText="Grape Varietal(s) " />
                   <Label fx:id="grapeVarietalsLabel" layoutX="15.0" layoutY="55.0" text="Grape Varietal(s)" />
-                  <TextField fx:id="wineAppellation" layoutX="153.0" layoutY="12.0" prefHeight="31.0" prefWidth="195.0" promptText="Wine Appelation (If On Label)" />
+                  <TextField fx:id="wineAppellation" layoutX="153.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="243.0" promptText="Wine Appelation (If On Label)" />
                   <Label fx:id="wineAppellationLabel" layoutX="16.0" layoutY="18.0" text="Wine Appelation" />
                   <Label fx:id="vintageYearLabel" layoutX="16.0" layoutY="98.0" text="Vintage Year" />
-                  <TextField fx:id="vintageYear" layoutX="152.0" layoutY="92.0" prefHeight="31.0" prefWidth="198.0" promptText="Vintage Year" />
+                  <TextField fx:id="vintageYear" layoutX="152.0" layoutY="92.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="198.0" promptText="Vintage Year" />
                   <Label fx:id="phLevelLabel" layoutX="19.0" layoutY="136.0" text="PH Level" />
-                  <TextField fx:id="phLevel" layoutX="151.0" layoutY="130.0" prefHeight="31.0" prefWidth="199.0" promptText="PH Level (Required)" />
+                  <TextField fx:id="phLevel" layoutX="151.0" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="199.0" promptText="PH Level (Required)" />
                </children>
             </Group>
             <Button fx:id="backButton" layoutX="105.0" layoutY="361.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />

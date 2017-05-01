@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import static Form.StringParsing.*;
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 
 /**
@@ -56,6 +57,7 @@ public class applicationController extends UIController {
     public Label otherZipcodeLabel;
     public Label otherCountryLabel;
     public Label otherStreetLabel;
+    public Label errorLabel;
 
     void start(Main main, int count, Form form) {
         this.main = main;
@@ -78,6 +80,12 @@ public class applicationController extends UIController {
     @FXML
     public void changePageBack() throws IOException{
         System.out.println("Count before: " + count);
+        if (!isValid() && errorLabel != null) {
+            displayValidityError();
+            return;
+        } /*else if (!errorLabel.getText().equals("")) {
+            removeValidityError();
+        }*/
         switch (count) {
             case 0: storePage1(); break;
             case 1: storePage2(); break;
@@ -127,6 +135,13 @@ public class applicationController extends UIController {
     @FXML
     public void changePageNext() throws IOException{
         System.out.println("Count before: " + count);
+        if (!isValid()) {
+            System.out.println("There is an error");
+            displayValidityError();
+            return;
+        } /*else if (!errorLabel.getText().equals("")) {
+            removeValidityError();
+        }*/
         switch (count) {
             case 0: storePage1(); break;
             case 1: storePage2(); break;
@@ -439,6 +454,60 @@ public class applicationController extends UIController {
         if (string != null){
             textfield.setText(string);
         }
+    }
+
+    /**
+     * Helper function for checking boxes that need validation
+     * @return
+     */
+    private boolean isValid(){
+        boolean temp = true;
+        switch (count) {
+            case 0: temp = (repIDValidation(repID.getText()) &&
+                    permitValidation(permitNO.getText()) &&
+                    serialValidation(serialNO.getText()));
+                    break;
+            case 1: temp =  (emailValidation(email.getText()) &&
+                    phoneNmbrValidation(phoneNo.getText()));
+                    break;
+        }
+        return temp;
+    }
+
+    @FXML
+    private void displayValidityError(){
+        switch (count) {
+            case 0: if (!repIDValidation(repID.getText())){setRed(repID);}
+                    if (!permitValidation(permitNO.getText())){setRed(permitNO);}
+                    if (!serialValidation(serialNO.getText())){setRed(serialNO);}
+                    break;
+            case 1: if (!emailValidation(email.getText())){setRed(email);}
+                    if (!phoneNmbrValidation(phoneNo.getText())){setRed(phoneNo);}
+                    break;
+        }
+        errorLabel.setText("Please correct mistakes highlighted in red");
+    }
+
+    @FXML
+    private void removeValidityError(){
+        switch (count) {
+            case 0: if (repIDValidation(repID.getText())){removeRed(repID);}
+                if (permitValidation(permitNO.getText())){removeRed(permitNO);}
+                if (serialValidation(serialNO.getText())){removeRed(serialNO);}
+                break;
+            case 1: if (emailValidation(email.getText())){removeRed(email);}
+                if (phoneNmbrValidation(phoneNo.getText())){removeRed(phoneNo);}
+                break;
+        }
+        errorLabel.setText("");
+    }
+
+    private void setRed(TextField text){
+        text.setStyle("-fx-border-color:red");
+    }
+
+    private void removeRed(TextField text){
+        text.setStyle("-fx-border-color:green");
     }
 
 }
