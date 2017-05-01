@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="989.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.submittedApplicationsController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="987.0">
+         <children>
+            <TableView fx:id="resultsTable" layoutX="9.0" layoutY="161.0" prefHeight="428.0" prefWidth="969.0" style="-fx-border-style: solid;">
+               <columns>
+                  <TableColumn fx:id="formIDCol" prefWidth="120.0" text="Form ID">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="formID" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="permitNoCol" prefWidth="120.0" text="Permit No.">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="permitNo" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="serialNoCol" prefWidth="120.0" text="Serial No.">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="serialNo" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="completedDateCol" prefWidth="140.0" text="Completed Date">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="completedDate" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="fancifulNameCol" prefWidth="125.0" text="Fanciful Name">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="fancifulName" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="brandNameCol" prefWidth="120.0" text="Brand Name">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="brandName" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="originCol" prefWidth="100.0" text="Origin">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="originCode" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="typeIDCol" prefWidth="123.66668701171875" text="Type ID">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="typeID" />
+                     </cellValueFactory>
+                  </TableColumn>
+               </columns>
+            </TableView>
+            <TextField fx:id="searchBox" layoutX="253.0" layoutY="117.0" onKeyReleased="#getSearchResults" prefHeight="31.0" prefWidth="482.0" promptText="Search Brand or Fanciful Names " />
+            <CheckBox fx:id="maltBeverageCheckbox" layoutX="798.0" layoutY="97.0" mnemonicParsing="false" onAction="#getSearchResults" text="Malt Beverage" />
+            <CheckBox fx:id="wineCheckbox" layoutX="798.0" layoutY="66.0" mnemonicParsing="false" onAction="#getSearchResults" text="Wine" />
+            <CheckBox fx:id="distilledSpiritsCheckbox" layoutX="797.0" layoutY="127.0" mnemonicParsing="false" onAction="#getSearchResults" text="Distilled Spirits" />
+            <Text layoutX="251.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Submitted Applications">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

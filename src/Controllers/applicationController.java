@@ -154,21 +154,26 @@ public class applicationController extends UIController {
                 else if(form.getalcohol_type().equals("Wine")) {pageName = "applicationPageWine.fxml";}
                 else {pageName = "printableVersion.fxml";
                     System.out.println("we changing to printable");}
-                break;
+                    break;
             case 5: pageName = "printableVersion.fxml"; break;
         }
         System.out.println("Change page to: " + pageName);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/" + pageName));
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
+        stage.show();
         if(count < 0) {
             mainPageController controller = loader.getController();
             controller.start(this.main);
             return;
         }
+        if(pageName.equals("printableVersion.fxml")) {
+            printableVersionController controller = loader.getController();
+            controller.start(this.main, form);
+            return;
+        }
         applicationController controller = loader.getController();
         controller.start(this.main, count, form);
-        stage.show();
         switch (count) {
             case 0: controller.createPage1(); break;
             case 1: controller.createPage2(); break;

@@ -103,7 +103,15 @@ public class mainPageController extends UIController {
     }
 
     @FXML
-    private void displaySubmittedApplications() {
+    private void displaySubmittedApplications() throws IOException {
+        Stage stage;
+        stage=(Stage) loginButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/submittedApplicationsPage.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+        submittedApplicationsController controller = loader.getController();
+        controller.start(this.main);
     }
 
 }

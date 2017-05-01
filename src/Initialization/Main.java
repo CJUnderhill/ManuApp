@@ -17,7 +17,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/mainPage.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Standalone Application");
-        primaryStage.setScene(new Scene(root, 700, 500));
+        primaryStage.setScene(new Scene(root, 1000, 700));
         primaryStage.show();
         mainPageController controller = loader.getController();
         controller.start(this);

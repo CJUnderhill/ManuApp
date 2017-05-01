@@ -10,6 +10,8 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
@@ -17,7 +19,10 @@ import javafx.stage.DirectoryChooser;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 /**
  * Status: incomplete.
@@ -37,11 +42,14 @@ public class printableVersionController extends UIController {
     private CheckBox domesticCheckbox, importedCheckbox, wineCheckbox, maltCheckbox, distilledCheckbox,
             certLabelApprovalCheckbox, certExemptionCheckbox, distinctiveCheckbox, resubmissionCheckbox;
     @FXML
+    private ImageView imageView;
+    @FXML
     private Button saveAsButton;
 
     public void start(Main main, Form form) {
         this.main = main;
         this.form = form;
+        System.out.println(System.getProperty("user.dir"));
         setFormPrintableVersion();
     }
 
@@ -96,14 +104,21 @@ public class printableVersionController extends UIController {
         email.setText(form.getEmail());
         if(form.getlabel_text() != null) {labelText.setText(form.getlabel_text());}
         else {labelText.setText("");}
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        submitDate.setText(form.getsubmit_date().toLocalDate().format(formatter)); //TODO: check if it works
+        form.setsubmit_date(Date.valueOf(LocalDate.now()));
+        submitDate.setText(form.getsubmit_date().toLocalDate().format(formatter));
+
         signature.setText(form.getSignature());
+
+        form.setapplicant_id(main.getUser().getUid());
         User applicant = dbManager.findUser("user_id='" + form.getapplicant_id() + "'");
         String applicant_name = applicant.getFirstName() + " " + applicant.getMiddleInitial() + " " + applicant.getLastName();
         applicantName.setText(applicant_name);
+
         String combinedAddress = form.getapplicant_street(); //TODO: finish this
         mailingAddress.setText(""); //TODO: combine/make different lines for agent state, etc.
+
         differentMailingAddress.setText(form.getmailing_address());
         if(form.getexpiration_date() != null) {expirationDate.setText(form.getexpiration_date().toLocalDate().format(formatter));} //TODO: same as above
         else {expirationDate.setText("");}
