@@ -27,7 +27,7 @@
                </children>
             </Group>
             <Button fx:id="backButton" layoutX="105.0" layoutY="361.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
-            <Button fx:id="nextButton" layoutX="528.0" layoutY="361.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" text="Next" />
+            <Button fx:id="nextButton" layoutX="528.0" layoutY="361.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" text="Submit" />
          </children>
       </AnchorPane>
    </content>

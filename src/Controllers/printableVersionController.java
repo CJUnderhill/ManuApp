@@ -33,8 +33,6 @@ public class printableVersionController extends UIController {
     private Form form = new Form();
 
     @FXML
-    private ScrollPane scrollPane;
-    @FXML
     private Text ttb_id, rep_id, permitNo, serialNo, brandName, fancifulName, formula, phoneNo,
             grapeVarietals, wineAppellation, email, labelText, submitDate, signature, applicantName,
             mailingAddress, differentMailingAddress, expirationDate, certExemptionText, distinctiveText, resubmissionText;
@@ -129,7 +127,7 @@ public class printableVersionController extends UIController {
      */
     @FXML
     public void saveAsAction(){
-        WritableImage image = scrollPane.snapshot(new SnapshotParameters(), null);
+        WritableImage image = imageView.snapshot(new SnapshotParameters(), null);
         // TODO: check working
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setInitialDirectory(new File(System.getProperty("user.dir")));

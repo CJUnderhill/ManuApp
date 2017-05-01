@@ -150,7 +150,27 @@ public class applicationController extends UIController {
                     return;
                 }
             case 1: storePage2(); break;
-            case 2: storePage3(); break;
+            case 2:
+                if(!option_1_checkbox.isSelected() && !option_2_checkbox.isSelected() &&
+                        !option_3_checkbox.isSelected() && !option_4_checkbox.isSelected()) {
+                    errorLabel.setText("No option selected");
+                    errorLabel.setVisible(true);
+                    return;
+                }
+                if(!((option_1_checkbox.isSelected() && !option_2_checkbox.isSelected() &&
+                        !option_3_checkbox.isSelected() && !option_4_checkbox.isSelected()) ||
+                        (option_2_checkbox.isSelected() && !option_1_checkbox.isSelected() &&
+                                !option_3_checkbox.isSelected() && !option_4_checkbox.isSelected()) ||
+                        option_3_checkbox.isSelected() && !option_2_checkbox.isSelected() &&
+                                !option_1_checkbox.isSelected() && !option_4_checkbox.isSelected() ||
+                        option_4_checkbox.isSelected() && !option_2_checkbox.isSelected() &&
+                                !option_3_checkbox.isSelected() && !option_1_checkbox.isSelected())) {
+                    errorLabel.setText("Multiple options selected");
+                    errorLabel.setVisible(true);
+                    return;
+                }
+                storePage3();
+                break;
             case 3: storePage4(); break;
             case 4: if(form.getalcohol_type().equals("Wine")) {storeWinePage();} break;
         }
@@ -172,8 +192,7 @@ public class applicationController extends UIController {
                     count = 0;
                 }
                 else if(form.getalcohol_type().equals("Wine")) {pageName = "applicationPageWine.fxml";}
-                else {pageName = "printableVersion.fxml";
-                    System.out.println("we changing to printable");}
+                else {pageName = "printableVersion.fxml";}
                     break;
             case 5: pageName = "printableVersion.fxml"; break;
         }
@@ -198,7 +217,10 @@ public class applicationController extends UIController {
             case 0: controller.createPage1(); break;
             case 1: controller.createPage2(); break;
             case 2: controller.createPage3(); break;
-            case 3: controller.createPage4(); break;
+            case 3:
+                controller.createPage4();
+                if(!form.getalcohol_type().equals("Wine")) {controller.nextButton.setText("Submit");}
+                break;
             case 4: if(form.getalcohol_type().equals("Wine")) {controller.createWinePage();} break;
         }
     }
@@ -493,22 +515,30 @@ public class applicationController extends UIController {
 
     @FXML
     private void displayValidityError(){
+        String errorString = ""; //TODO: DO THIS!!!
         switch (count) {
             case 0:
                 System.out.println("repID: " + repID.getText());
                 if (!repID.getText().equals("")) {
                     if (!repIDValidation(repID.getText())) {
                         setRed(repID);
+                        errorString += "Rep ID format: #####\n";
                     }
                 }
-                if (!permitValidation(permitNO.getText())){setRed(permitNO);}
-                if (!serialValidation(serialNO.getText())){setRed(serialNO);}
+                if (!permitValidation(permitNO.getText())){
+                    setRed(permitNO);
+                    errorString += "Permit No format: SS-SS-####\n";
+                }
+                if (!serialValidation(serialNO.getText())){
+                    setRed(serialNO);
+                    errorString += "Serial No format: ##-####";
+                }
                 break;
             case 1: if (!emailValidation(email.getText())){setRed(email);}
                     if (!phoneNmbrValidation(phoneNo.getText())){setRed(phoneNo);}
                     break;
         }
-        errorLabel.setText("Please correct mistakes highlighted in red");
+        errorLabel.setText("Please correct mistakes highlighted in red\n" + errorString);
     }
 
     @FXML

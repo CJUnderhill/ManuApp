@@ -46,6 +46,7 @@
             </Group>
             <Button fx:id="backButton" layoutX="120.0" layoutY="405.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
             <Button fx:id="nextButton" layoutX="525.0" layoutY="405.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" text="Next" />
+            <Label fx:id="errorLabel" layoutX="251.0" layoutY="76.0" style="-fx-text-fill: red;" text="Multiple options selected" visible="false" />
          </children>
       </AnchorPane>
    </content>
