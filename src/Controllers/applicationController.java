@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import static Form.StringParsing.*;
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 
 /**
@@ -56,6 +57,7 @@ public class applicationController extends UIController {
     public Label otherZipcodeLabel;
     public Label otherCountryLabel;
     public Label otherStreetLabel;
+    public Label errorLabel;
 
     void start(Main main, int count, Form form) {
         this.main = main;
@@ -434,6 +436,45 @@ public class applicationController extends UIController {
         if (string != null){
             textfield.setText(string);
         }
+    }
+
+    /**
+     * Helper function for checking boxes that need validation
+     * @return
+     */
+    private boolean isValid(){
+        return (emailValidation(email.getText()) &
+                repIDValidation(repID.getText()) &
+                permitValidation(permitNO.getText()) &
+                phoneNmbrValidation(phoneNo.getText()) &
+                serialValidation(serialNO.getText()));
+    }
+
+    private void displayValidityError(){
+        if (!emailValidation(email.getText())){setRed(email);}
+        if (!repIDValidation(repID.getText())){setRed(repID);}
+        if (!permitValidation(permitNO.getText())){setRed(permitNO);}
+        if (!phoneNmbrValidation(phoneNo.getText())){setRed(phoneNo);}
+        if (!serialValidation(serialNO.getText())){setRed(serialNO);}
+
+        errorLabel.setText("Please correct mistakes highlighted in red");
+
+    }
+
+    private void removeValidityError(){
+        TextField[] items = {email,repID,permitNO,phoneNo,serialNO};
+        for (TextField item : items) {
+            removeRed(item);
+        }
+    }
+
+
+    private void setRed(TextField text){
+        text.setStyle("-fx-text-fill:red");
+    }
+
+    private void removeRed(TextField text){
+        text.setStyle("-fx-text-fill: green");
     }
 
 }

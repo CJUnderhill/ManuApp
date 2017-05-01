@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
    <content>
       <AnchorPane prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -27,7 +27,7 @@
                      <font>
                         <Font size="16.0" />
                      </font></CheckBox>
-                  <TextField fx:id="option_2_text" layoutX="105.0" layoutY="58.0" prefHeight="31.0" prefWidth="65.0" promptText="State" />
+                  <TextField fx:id="option_2_text" layoutX="105.0" layoutY="58.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="65.0" promptText="State" />
                   <Label layoutX="18.0" layoutY="64.0" text="For Sale in:" />
                   <Label layoutX="175.0" layoutY="64.0" text="only (State Abbreviation)" />
                   <CheckBox fx:id="option_3_checkbox" layoutX="18.0" layoutY="100.0" mnemonicParsing="false" text="Distinctive Bottle Approval, Total Bottle">
@@ -35,12 +35,12 @@
                         <Font size="16.0" />
                      </font></CheckBox>
                   <Label layoutX="17.0" layoutY="130.0" text="Capacity Before Closure" />
-                  <TextField fx:id="option_3_text" layoutX="207.0" layoutY="123.0" prefHeight="31.0" prefWidth="88.0" promptText="Capacity" />
+                  <TextField fx:id="option_3_text" layoutX="207.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="88.0" promptText="Capacity" />
                   <CheckBox fx:id="option_4_checkbox" layoutX="18.0" layoutY="158.0" mnemonicParsing="false" text="Resubmission After Rejection">
                      <font>
                         <Font size="16.0" />
                      </font></CheckBox>
-                  <TextField fx:id="option_4_text" layoutX="72.0" layoutY="182.0" promptText="TTB ID" />
+                  <TextField fx:id="option_4_text" layoutX="72.0" layoutY="182.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="TTB ID" />
                   <Label layoutX="17.0" layoutY="184.0" text="TTB ID" />
                </children>
             </Group>

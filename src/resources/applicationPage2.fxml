@@ -9,21 +9,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.applicationController">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
          <children>
             <ProgressBar layoutX="277.0" layoutY="370.0" prefWidth="200.0" progress="0.3333333333" />
             <Label layoutX="200.0" layoutY="370.0" text="Progress: " />
-            <TextField fx:id="phoneNo" layoutX="174.0" layoutY="81.0" prefHeight="31.0" prefWidth="156.0" promptText="Phone Number" />
+            <TextField fx:id="phoneNo" layoutX="174.0" layoutY="81.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="166.0" promptText="Phone Number" />
             <Label layoutX="59.0" layoutY="88.0" text="Phone Number" />
-            <TextField fx:id="email" layoutX="456.0" layoutY="81.0" prefHeight="31.0" prefWidth="156.0" promptText="Email Address" />
+            <TextField fx:id="email" layoutX="458.0" layoutY="81.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="176.0" promptText="Email Address" />
             <Label layoutX="348.0" layoutY="88.0" text="Email Address" />
-            <TextField fx:id="applicantStreet" layoutX="131.0" layoutY="125.0" promptText="Street" />
-            <TextField fx:id="applicantCity" layoutX="131.0" layoutY="161.0" promptText="City" />
-            <TextField fx:id="applicantState" layoutX="131.0" layoutY="198.0" promptText="State" />
-            <TextField fx:id="applicantZip" layoutX="131.0" layoutY="234.0" promptText="Zipcode" />
-            <TextField fx:id="applicantCountry" layoutX="131.0" layoutY="270.0" promptText="Country" />
+            <TextField fx:id="applicantStreet" layoutX="131.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Street" />
+            <TextField fx:id="applicantCity" layoutX="131.0" layoutY="161.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="City" />
+            <TextField fx:id="applicantState" layoutX="131.0" layoutY="198.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="State" />
+            <TextField fx:id="applicantZip" layoutX="131.0" layoutY="234.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Zipcode" />
+            <TextField fx:id="applicantCountry" layoutX="131.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Country" />
             <Label layoutX="61.0" layoutY="131.0" text="Street" />
             <Label layoutX="61.0" layoutY="169.0" text="City" />
             <Label layoutX="61.0" layoutY="204.0" text="State" />
@@ -33,11 +33,11 @@
             <Group layoutX="377.0" layoutY="145.0" />
             <Button fx:id="nextButton" layoutX="519.0" layoutY="365.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" text="Next" />
             <Button fx:id="backButton" layoutX="110.0" layoutY="363.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
-            <TextField fx:id="otherStreet" layoutX="412.0" layoutY="125.0" promptText="Street" visible="false" />
-            <TextField fx:id="otherCity" layoutX="412.0" layoutY="165.0" promptText="City" visible="false" />
-            <TextField fx:id="otherState" layoutX="412.0" layoutY="206.0" promptText="State" visible="false" />
-            <TextField fx:id="otherZip" layoutX="412.0" layoutY="249.0" promptText="Zipcode" visible="false" />
-            <TextField fx:id="otherCountry" layoutX="412.0" layoutY="288.0" promptText="Country" visible="false" />
+            <TextField fx:id="otherStreet" layoutX="412.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Street" visible="false" />
+            <TextField fx:id="otherCity" layoutX="412.0" layoutY="165.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="City" visible="false" />
+            <TextField fx:id="otherState" layoutX="412.0" layoutY="206.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="State" visible="false" />
+            <TextField fx:id="otherZip" layoutX="412.0" layoutY="249.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Zipcode" visible="false" />
+            <TextField fx:id="otherCountry" layoutX="412.0" layoutY="288.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Country" visible="false" />
             <Label fx:id="otherStreetLabel" layoutX="351.0" layoutY="130.0" text="Street" visible="false" />
             <Label fx:id="otherCityLabel" layoutX="355.0" layoutY="170.0" text="City" visible="false" />
             <Label fx:id="otherStateLabel" layoutX="351.0" layoutY="211.0" text="State" visible="false" />
