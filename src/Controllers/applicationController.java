@@ -57,7 +57,7 @@ public class applicationController extends UIController {
     public Label otherZipcodeLabel;
     public Label otherCountryLabel;
     public Label otherStreetLabel;
-    public Label errorLabel;
+    public Label errorLabel, repIDError, permitError, serialError;
 
     void start(Main main, int count, Form form) {
         this.main = main;
@@ -79,16 +79,23 @@ public class applicationController extends UIController {
 
     @FXML
     public void changePageBack() throws IOException{
+        boolean temp;
         System.out.println("Count before: " + count);
         switch (count) {
-            case 0: boolean temp = storePage1();
+            case 0: break;/*temp = storePage1();
                     if (temp) {
                         break;
                     } else {
                         errorLabel.setText("Please enter required fields");
                         return;
-                    }
-            case 1: storePage2(); break;
+                    }*/
+            case 1: break;/*temp = storePage2();
+                if (temp) {
+                    break;
+                } else {
+                    errorLabel.setText("Please enter required fields");
+                    return;
+                }*/
             case 2: storePage3(); break;
             case 3: storePage4(); break;
             case 4: if(form.getalcohol_type().equals("Wine")) {storeWinePage();} break;
@@ -134,6 +141,7 @@ public class applicationController extends UIController {
 
     @FXML
     public void changePageNext() throws IOException{
+        boolean temp;
         System.out.println("Count before: " + count);
         if (!isValid()) {
             System.out.println("There is an error");
@@ -142,14 +150,20 @@ public class applicationController extends UIController {
             return;
         }
         switch (count) {
-            case 0: boolean temp = storePage1();
+            case 0: temp = storePage1();
                 if (temp) {
                     break;
                 } else {
                     errorLabel.setText("Please enter required fields");
                     return;
                 }
-            case 1: storePage2(); break;
+            case 1: temp = storePage2();
+                if (temp) {
+                    break;
+                } else {
+                    errorLabel.setText("Please enter required fields");
+                    return;
+                }
             case 2:
                 if(!option_1_checkbox.isSelected() && !option_2_checkbox.isSelected() &&
                         !option_3_checkbox.isSelected() && !option_4_checkbox.isSelected()) {
@@ -283,7 +297,8 @@ public class applicationController extends UIController {
         setTextFields(form.getapplicant_country(), applicantCountry);
     }
 
-    public void storePage2() {
+    public boolean storePage2() {
+        boolean temp = true;
         form.setphone_no(phoneNo.getText());
         form.setEmail(email.getText());
         form.setapplicant_street(applicantStreet.getText());
@@ -298,6 +313,14 @@ public class applicationController extends UIController {
             form.setmailing_address(otherStreet.getText() + "\n" + otherCity.getText() + " " + otherState.getText()
                     + "," + otherZip.getText() + "\n" + otherCountry.getText());
         }
+
+        if (applicantStreet.getText().equals("") || applicantState.getText().equals("") ||
+                applicantCity.getText().equals("") || applicantZip.getText().equals("") ||
+                applicantCountry.getText().equals("")) {
+            temp = false;
+        }
+
+        return temp;
     }
 
     public void createPage3() {
@@ -522,23 +545,23 @@ public class applicationController extends UIController {
                 if (!repID.getText().equals("")) {
                     if (!repIDValidation(repID.getText())) {
                         setRed(repID);
-                        errorString += "Rep ID format: #####\n";
+                        repIDError.setText("Format: #####");
                     }
                 }
                 if (!permitValidation(permitNO.getText())){
                     setRed(permitNO);
-                    errorString += "Permit No format: SS-SS-####\n";
+                    permitError.setText("Format: SS-SS-####");
                 }
                 if (!serialValidation(serialNO.getText())){
                     setRed(serialNO);
-                    errorString += "Serial No format: ##-####";
+                    serialError.setText("Format: ##-####");
                 }
                 break;
             case 1: if (!emailValidation(email.getText())){setRed(email);}
                     if (!phoneNmbrValidation(phoneNo.getText())){setRed(phoneNo);}
                     break;
         }
-        errorLabel.setText("Please correct mistakes highlighted in red\n" + errorString);
+        errorLabel.setText("Please correct mistakes highlighted in red\n");
     }
 
     @FXML

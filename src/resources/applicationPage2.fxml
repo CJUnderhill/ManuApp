@@ -19,11 +19,11 @@
             <Label layoutX="59.0" layoutY="88.0" text="Phone Number" />
             <TextField fx:id="email" layoutX="458.0" layoutY="81.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="176.0" promptText="Email Address" />
             <Label layoutX="348.0" layoutY="88.0" text="Email Address" />
-            <TextField fx:id="applicantStreet" layoutX="131.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Street" />
-            <TextField fx:id="applicantCity" layoutX="131.0" layoutY="161.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="City" />
-            <TextField fx:id="applicantState" layoutX="131.0" layoutY="198.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="State" />
-            <TextField fx:id="applicantZip" layoutX="131.0" layoutY="234.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Zipcode" />
-            <TextField fx:id="applicantCountry" layoutX="131.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Country" />
+            <TextField fx:id="applicantStreet" layoutX="131.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Street (Required)" />
+            <TextField fx:id="applicantCity" layoutX="131.0" layoutY="161.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="City (Required)" />
+            <TextField fx:id="applicantState" layoutX="131.0" layoutY="198.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="State (Required)" />
+            <TextField fx:id="applicantZip" layoutX="131.0" layoutY="234.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Zipcode (Required)" />
+            <TextField fx:id="applicantCountry" layoutX="131.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Country (Required)" />
             <Label layoutX="61.0" layoutY="131.0" text="Street" />
             <Label layoutX="61.0" layoutY="169.0" text="City" />
             <Label layoutX="61.0" layoutY="204.0" text="State" />
