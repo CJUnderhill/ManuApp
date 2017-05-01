@@ -81,7 +81,13 @@ public class applicationController extends UIController {
     public void changePageBack() throws IOException{
         System.out.println("Count before: " + count);
         switch (count) {
-            case 0: storePage1(); break;
+            case 0: boolean temp = storePage1();
+                    if (temp) {
+                        break;
+                    } else {
+                        errorLabel.setText("Please enter required fields");
+                        return;
+                    }
             case 1: storePage2(); break;
             case 2: storePage3(); break;
             case 3: storePage4(); break;
@@ -136,10 +142,16 @@ public class applicationController extends UIController {
             return;
         }
         switch (count) {
-            case 0: storePage1(); break;
+            case 0: boolean temp = storePage1();
+                if (temp) {
+                    break;
+                } else {
+                    errorLabel.setText("Please enter required fields");
+                    return;
+                }
             case 1: storePage2(); break;
             case 2: storePage3(); break;
-            case 3: createPage4(); break;
+            case 3: storePage4(); break;
             case 4: if(form.getalcohol_type().equals("Wine")) {storeWinePage();} break;
         }
         Stage stage;
@@ -219,7 +231,8 @@ public class applicationController extends UIController {
     }
 
     //Is called when the user presses back or next to save the values in the textfields of page 1
-    public void storePage1() {
+    public boolean storePage1() {
+        boolean temp = true;
         form.setSource((String)source_combobox.getValue());
         form.setalcohol_type((String)alcohol_type_combobox.getValue());
         form.setrep_id(repID.getText());
@@ -231,6 +244,11 @@ public class applicationController extends UIController {
             form.setalcohol_content(Double.parseDouble(alcoholContent.getText()));
         }
         form.setFormula(formula.getText());
+        if (brandName.getText().equals("") || source_combobox.getValue() == null || alcohol_type_combobox.getValue() == null) {
+            temp = false;
+        }
+
+        return temp;
     }
 
     public void createPage2() {
