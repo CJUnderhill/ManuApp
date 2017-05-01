@@ -32,6 +32,7 @@
             <TextField fx:id="formula" layoutX="325.0" layoutY="288.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Formula" />
             <Button fx:id="nextButton" layoutX="507.0" layoutY="396.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" prefHeight="0.0" prefWidth="72.0" text="Next" />
             <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
+            <Label fx:id="errorLabel" layoutX="193.0" layoutY="29.0" prefHeight="20.0" prefWidth="362.0" />
          </children>
       </AnchorPane>
    </content>

@@ -80,6 +80,12 @@ public class applicationController extends UIController {
     @FXML
     public void changePageBack() throws IOException{
         System.out.println("Count before: " + count);
+        if (!isValid() && errorLabel != null) {
+            displayValidityError();
+            return;
+        } /*else if (!errorLabel.getText().equals("")) {
+            removeValidityError();
+        }*/
         switch (count) {
             case 0: storePage1(); break;
             case 1: storePage2(); break;
@@ -129,6 +135,13 @@ public class applicationController extends UIController {
     @FXML
     public void changePageNext() throws IOException{
         System.out.println("Count before: " + count);
+        if (!isValid()) {
+            System.out.println("There is an error");
+            displayValidityError();
+            return;
+        } /*else if (!errorLabel.getText().equals("")) {
+            removeValidityError();
+        }*/
         switch (count) {
             case 0: storePage1(); break;
             case 1: storePage2(); break;
@@ -443,38 +456,53 @@ public class applicationController extends UIController {
      * @return
      */
     private boolean isValid(){
-        return (emailValidation(email.getText()) &
-                repIDValidation(repID.getText()) &
-                permitValidation(permitNO.getText()) &
-                phoneNmbrValidation(phoneNo.getText()) &
-                serialValidation(serialNO.getText()));
-    }
-
-    private void displayValidityError(){
-        if (!emailValidation(email.getText())){setRed(email);}
-        if (!repIDValidation(repID.getText())){setRed(repID);}
-        if (!permitValidation(permitNO.getText())){setRed(permitNO);}
-        if (!phoneNmbrValidation(phoneNo.getText())){setRed(phoneNo);}
-        if (!serialValidation(serialNO.getText())){setRed(serialNO);}
-
-        errorLabel.setText("Please correct mistakes highlighted in red");
-
-    }
-
-    private void removeValidityError(){
-        TextField[] items = {email,repID,permitNO,phoneNo,serialNO};
-        for (TextField item : items) {
-            removeRed(item);
+        boolean temp = true;
+        switch (count) {
+            case 0: temp = (repIDValidation(repID.getText()) &&
+                    permitValidation(permitNO.getText()) &&
+                    serialValidation(serialNO.getText()));
+                    break;
+            case 1: temp =  (emailValidation(email.getText()) &&
+                    phoneNmbrValidation(phoneNo.getText()));
+                    break;
         }
+        return temp;
     }
 
+    @FXML
+    private void displayValidityError(){
+        switch (count) {
+            case 0: if (!repIDValidation(repID.getText())){setRed(repID);}
+                    if (!permitValidation(permitNO.getText())){setRed(permitNO);}
+                    if (!serialValidation(serialNO.getText())){setRed(serialNO);}
+                    break;
+            case 1: if (!emailValidation(email.getText())){setRed(email);}
+                    if (!phoneNmbrValidation(phoneNo.getText())){setRed(phoneNo);}
+                    break;
+        }
+        errorLabel.setText("Please correct mistakes highlighted in red");
+    }
+
+    @FXML
+    private void removeValidityError(){
+        switch (count) {
+            case 0: if (repIDValidation(repID.getText())){removeRed(repID);}
+                if (permitValidation(permitNO.getText())){removeRed(permitNO);}
+                if (serialValidation(serialNO.getText())){removeRed(serialNO);}
+                break;
+            case 1: if (emailValidation(email.getText())){removeRed(email);}
+                if (phoneNmbrValidation(phoneNo.getText())){removeRed(phoneNo);}
+                break;
+        }
+        errorLabel.setText("");
+    }
 
     private void setRed(TextField text){
-        text.setStyle("-fx-text-fill:red");
+        text.setStyle("-fx-border-color:red");
     }
 
     private void removeRed(TextField text){
-        text.setStyle("-fx-text-fill: green");
+        text.setStyle("-fx-border-color:green");
     }
 
 }

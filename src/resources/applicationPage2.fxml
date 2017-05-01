@@ -13,8 +13,8 @@
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
          <children>
-            <ProgressBar layoutX="277.0" layoutY="370.0" prefWidth="200.0" progress="0.3333333333" />
-            <Label layoutX="200.0" layoutY="370.0" text="Progress: " />
+            <ProgressBar layoutX="279.0" layoutY="395.0" prefWidth="200.0" progress="0.3333333333" />
+            <Label layoutX="202.0" layoutY="395.0" text="Progress: " />
             <TextField fx:id="phoneNo" layoutX="174.0" layoutY="81.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="166.0" promptText="Phone Number" />
             <Label layoutX="59.0" layoutY="88.0" text="Phone Number" />
             <TextField fx:id="email" layoutX="458.0" layoutY="81.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="176.0" promptText="Email Address" />
@@ -31,8 +31,8 @@
             <Label layoutX="60.0" layoutY="240.0" text="Zipcode" />
             <CheckBox fx:id="sameAsApplicantBox" layoutX="60.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#showSecondAddress" text="Check if Mailing Address is Different" />
             <Group layoutX="377.0" layoutY="145.0" />
-            <Button fx:id="nextButton" layoutX="519.0" layoutY="365.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" text="Next" />
-            <Button fx:id="backButton" layoutX="110.0" layoutY="363.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
+            <Button fx:id="nextButton" layoutX="521.0" layoutY="390.0" mnemonicParsing="false" onAction="#changePageNext" onMouseClicked="#changePageNext" text="Next" />
+            <Button fx:id="backButton" layoutX="112.0" layoutY="388.0" mnemonicParsing="false" onAction="#changePageBack" onMouseClicked="#changePageBack" text="Back" />
             <TextField fx:id="otherStreet" layoutX="412.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="Street" visible="false" />
             <TextField fx:id="otherCity" layoutX="412.0" layoutY="165.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="City" visible="false" />
             <TextField fx:id="otherState" layoutX="412.0" layoutY="206.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="206.0" promptText="State" visible="false" />
@@ -43,6 +43,7 @@
             <Label fx:id="otherStateLabel" layoutX="351.0" layoutY="211.0" text="State" visible="false" />
             <Label fx:id="otherCountryLabel" layoutX="346.0" layoutY="293.0" text="Country" visible="false" />
             <Label fx:id="otherZipcodeLabel" layoutX="346.0" layoutY="254.0" text="Zipcode" visible="false" />
+            <Label fx:id="errorLabel" layoutX="189.0" layoutY="38.0" prefHeight="20.0" prefWidth="362.0" />
          </children>
       </AnchorPane>
    </content>
